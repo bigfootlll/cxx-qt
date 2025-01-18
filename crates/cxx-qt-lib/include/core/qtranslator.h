@@ -10,7 +10,7 @@ namespace cxxqtlib1 {
 
 ::std::unique_ptr<QTranslator> qtranslatorNew();
 
-bool loadTranslation(QTranslator& translator, const QString &qmFilePath);
+bool loadTranslation(std::unique_ptr<QTranslator> translator, const QString &qmFilePath);
 
 }
 }

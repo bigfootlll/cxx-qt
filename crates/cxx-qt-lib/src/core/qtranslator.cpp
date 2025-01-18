@@ -12,9 +12,9 @@ qtranslatorNew()
 }
 
 bool
-loadTranslation(QTranslator& translator, const QString& qmFilePath)
+loadTranslation(std::unique_ptr<QTranslator> translator, const QString& qmFilePath)
 {
-    return translator.load(qmFilePath);
+    return translator->load(qmFilePath);
 }
 
 }
