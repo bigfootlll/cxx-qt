@@ -31,5 +31,8 @@ qguiapplicationSetDesktopFileName(const QString& name);
 QString
 qguiapplicationDesktopFileName();
 
+bool
+qguiapplicationLoadTranslation(QGuiApplication& app, const QString& qmFilePath);
+
 }
 }

@@ -4,6 +4,9 @@
 #include <QDebug>
 #include <QDir>
 #include <QStringList>
+#include <QCoreApplication>
+#include <QGuiApplication>
+
 namespace rust {
 namespace cxxqtlib1 {
 
@@ -31,5 +34,6 @@ loadTranslation(std::unique_ptr<QTranslator> translator, const QString& qmFilePa
     
     return true;
 }
+
 }
 }

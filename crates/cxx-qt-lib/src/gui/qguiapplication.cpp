@@ -9,6 +9,8 @@
 #include "cxx-qt-lib/qguiapplication.h"
 
 #include "cxx-qt-lib/qcoreapplication.h"
+#include <QTranslator>
+#include <QDebug>
 
 namespace rust {
 namespace cxxqtlib1 {
@@ -51,6 +53,17 @@ QString
 qguiapplicationDesktopFileName()
 {
   return QGuiApplication::desktopFileName();
+}
+
+bool
+qguiapplicationLoadTranslation(QGuiApplication& app, const QString& qmFilePath)
+{
+  auto translator = ::std::make_unique<QTranslator>();
+  if (!translator->load(qmFilePath)) {
+    qDebug() << "Failed to load translation file:" << qmFilePath;
+    return false;
+  }
+  return app.installTranslator(translator.get());
 }
 
 }
