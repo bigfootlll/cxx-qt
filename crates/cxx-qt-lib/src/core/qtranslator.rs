@@ -27,7 +27,9 @@ impl QTranslator {
     pub fn load_translation(ptr: cxx::UniquePtr<QTranslator>, qm_file_path: &str) -> bool {
         // 将 &str 转换为 &QString
         let qm_file_path = ffi::QString::from(qm_file_path);
-        ffi::qtranslator_load_translation(ptr, &qm_file_path)
+        let result = ffi::qtranslator_load_translation(ptr, &qm_file_path);
+        println!("load_translation result: {}", result);
+        result
     }
 
     pub fn new() -> cxx::UniquePtr<Self> {
