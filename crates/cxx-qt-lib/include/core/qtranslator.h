@@ -3,11 +3,14 @@
 #include <QCoreApplication>
 #include <QTranslator>
 #include <QString>
+#include <memory>
 
 namespace rust {
 namespace cxxqtlib1 {
 
-bool loadTranslation(const QString &qmFilePath);
+::std::unique_ptr<QTranslator> qtranslatorNew();
+
+bool loadTranslation(QTranslator& translator, const QString &qmFilePath);
 
 }
 }

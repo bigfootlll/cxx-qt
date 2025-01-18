@@ -10,16 +10,26 @@ mod ffi {
     #[namespace = "rust::cxxqtlib1"]
     unsafe extern "C++" {
         #[doc(hidden)]
+        #[rust_name = "qtranslator_new"]
+        fn qtranslatorNew() -> UniquePtr<QTranslator>;
+
+        #[doc(hidden)]
         #[rust_name = "qtranslator_load_translation"]
-        fn loadTranslation(qmFilePath: &QString) -> bool;
+        fn loadTranslation(
+            ptr: Pin<&mut QTranslator>,
+            qmFilePath: &QString) -> bool;
     }
 }
 
 pub use ffi::QTranslator;
+use core::pin::Pin;
 
 impl QTranslator {
-    pub fn load_translation(&self, qm_file_path: &ffi::QString) -> bool {
-        ffi::qtranslator_load_translation(qm_file_path)
+    pub fn load_translation(ptr: Pin<&mut QTranslator>, qm_file_path: &ffi::QString) -> bool {
+        ffi::qtranslator_load_translation(ptr, qm_file_path)
+    }
+
+    pub fn new() -> cxx::UniquePtr<Self> {
+        ffi::qtranslator_new()
     }
 }
-
