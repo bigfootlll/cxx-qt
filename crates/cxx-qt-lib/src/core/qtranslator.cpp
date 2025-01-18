@@ -18,19 +18,18 @@ qtranslatorNew()
 bool
 loadTranslation(std::unique_ptr<QTranslator> translator, const QString& qmFilePath)
 {
-    qDebug() << "loadTranslation: " << qmFilePath.toStdString().c_str();
-    //list dir in resource 
-    QDir dir(":/");
-    QStringList files = dir.entryList(QDir::Files);
-    qDebug() << "files: " << files.join(", ").toStdString().c_str();
-    // load from resource 
-    QFile file(qmFilePath);
-    if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "Failed to open file: " << qmFilePath.toStdString().c_str();
+    if (!translator->load(qmFilePath)) {
+        qDebug() << "Failed to load translation file:" << qmFilePath;
         return false;
     }
-    return translator->load(qmFilePath);
+    
+    // Make sure the translator is installed
+    if (!QCoreApplication::installTranslator(translator.get())) {
+        qDebug() << "Failed to install translator";
+        return false;
+    }
+    
+    return true;
 }
-
 }
 }
