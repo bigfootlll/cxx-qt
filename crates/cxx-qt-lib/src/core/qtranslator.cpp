@@ -1,4 +1,7 @@
 #include "cxx-qt-lib/qtranslator.h"
+#include <QFile>
+#include <QIODevice>
+#include <QDebug>
 
 namespace rust {
 namespace cxxqtlib1 {
