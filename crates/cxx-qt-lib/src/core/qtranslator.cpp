@@ -3,7 +3,7 @@
 #include <QIODevice>
 #include <QDebug>
 #include <QDir>
-
+#include <QStringList>
 namespace rust {
 namespace cxxqtlib1 {
 
