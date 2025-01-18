@@ -65,6 +65,9 @@ pub use qsizef::QSizeF;
 mod qstring;
 pub use qstring::QString;
 
+mod qtranslator;
+pub use qtranslator::QTranslator;
+
 #[cfg(cxxqt_qt_version_major = "6")]
 mod qanystringview;
 #[cfg(cxxqt_qt_version_major = "6")]
