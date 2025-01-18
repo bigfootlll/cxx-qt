@@ -32,7 +32,7 @@ QString
 qguiapplicationDesktopFileName();
 
 bool
-qguiapplicationLoadTranslation(QGuiApplication& app, const QString& qmFilePath);
+qguiapplicationLoadTranslation(std::unique_ptr<QGuiApplication> app, const QString& qmFilePath);
 
 }
 }

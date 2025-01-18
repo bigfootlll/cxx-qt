@@ -92,7 +92,7 @@ mod ffi {
 
         #[doc(hidden)]
         #[rust_name = "qguiapplication_load_translation"]
-        fn qguiapplicationLoadTranslation(app: Pin<&mut QGuiApplication>, qm_file_path: &QString) -> bool;
+        fn qguiapplicationLoadTranslation(app: UniquePtr<QGuiApplication>, qm_file_path: &QString) -> bool;
     }
 
     // QGuiApplication is not a trivial to CXX and is not relocatable in Qt
@@ -219,8 +219,8 @@ impl QGuiApplication {
         ffi::qguiapplication_desktop_file_name()
     }
 
-    pub fn load_translation(self: Pin<&mut Self>, qm_file_path: &str) -> bool {
+    pub fn load_translation(app: cxx::UniquePtr<Self>, qm_file_path: &str) -> bool {
         let qm_file_path = QString::from(qm_file_path);
-        ffi::qguiapplication_load_translation(self, &qm_file_path)
+        ffi::qguiapplication_load_translation(app, &qm_file_path)
     }
 }
