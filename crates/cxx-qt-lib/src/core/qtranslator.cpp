@@ -14,6 +14,13 @@ qtranslatorNew()
 bool
 loadTranslation(std::unique_ptr<QTranslator> translator, const QString& qmFilePath)
 {
+    qDebug() << "loadTranslation: " << qmFilePath.toStdString().c_str();
+    // load from resource 
+    QFile file(qmFilePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Failed to open file: " << qmFilePath.toStdString().c_str();
+        return false;
+    }
     return translator->load(qmFilePath);
 }
 
