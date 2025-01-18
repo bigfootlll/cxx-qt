@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QIODevice>
 #include <QDebug>
+#include <QDir>
 
 namespace rust {
 namespace cxxqtlib1 {
