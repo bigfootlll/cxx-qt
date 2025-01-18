@@ -18,6 +18,10 @@ bool
 loadTranslation(std::unique_ptr<QTranslator> translator, const QString& qmFilePath)
 {
     qDebug() << "loadTranslation: " << qmFilePath.toStdString().c_str();
+    //list dir in resource 
+    QDir dir(":/");
+    QStringList files = dir.entryList(QDir::Files);
+    qDebug() << "files: " << files.join(", ").toStdString().c_str();
     // load from resource 
     QFile file(qmFilePath);
     if (!file.open(QIODevice::ReadOnly)) {
