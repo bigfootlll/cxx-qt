@@ -219,8 +219,7 @@ impl QGuiApplication {
         ffi::qguiapplication_desktop_file_name()
     }
 
-    pub fn load_translation(self: Pin<&mut Self>, qm_file_path: &str) -> bool {
-        let qm_file_path = QString::from(qm_file_path);
-        ffi::qguiapplication_load_translation(self, &qm_file_path)
+    pub fn load_translation(self: Pin<&mut Self>, qm_file_path: &QString) -> bool {
+        ffi::qguiapplication_load_translation(self, qm_file_path)
     }
 }
