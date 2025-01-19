@@ -93,6 +93,10 @@ mod ffi {
         #[doc(hidden)]
         #[rust_name = "qguiapplication_load_translation"]
         fn qguiapplicationLoadTranslation(app: Pin<&mut QGuiApplication>, qm_file_path: &QString) -> bool;
+
+        #[doc(hidden)]
+        #[rust_name = "qguiapplication_setup_language"]
+        fn qguiapplicationSetupLanguage(language: &QString);
     }
 
     // QGuiApplication is not a trivial to CXX and is not relocatable in Qt
@@ -221,5 +225,9 @@ impl QGuiApplication {
 
     pub fn load_translation(self: Pin<&mut Self>, qm_file_path: &QString) -> bool {
         ffi::qguiapplication_load_translation(self, qm_file_path)
+    }
+
+    pub fn setup_language(language: &QString) {
+        ffi::qguiapplication_setup_language(language);
     }
 }

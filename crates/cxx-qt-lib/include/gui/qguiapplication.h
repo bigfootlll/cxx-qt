@@ -32,6 +32,8 @@ qguiapplicationSetDesktopFileName(const QString& name);
 QString
 qguiapplicationDesktopFileName();
 
+void qguiapplicationSetupLanguage(const QString& language);
+
 template<typename T>
 bool
 qguiapplicationLoadTranslation(T& app, const QString& qmFilePath) {

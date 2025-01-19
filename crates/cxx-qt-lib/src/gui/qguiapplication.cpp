@@ -54,5 +54,20 @@ qguiapplicationDesktopFileName()
 {
   return QGuiApplication::desktopFileName();
 }
+
+void
+qguiapplicationSetupLanguage(const QString& language)
+{
+  auto* translator = new QTranslator();
+  if (!translator->load(language)) {
+    qDebug() << "Failed to load translation file:" << language;
+    delete translator;
+    return;
+  } else {
+    qDebug() << "Loaded translation file:" << language;
+  }
+  // QGuiApplication takes ownership of the translator
+  QGuiApplication::installTranslator(translator);
+}
 }
 }
