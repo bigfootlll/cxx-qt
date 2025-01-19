@@ -55,15 +55,16 @@ qguiapplicationDesktopFileName()
   return QGuiApplication::desktopFileName();
 }
 
+template<typename T>
 bool
-qguiapplicationLoadTranslation(std::unique_ptr<QGuiApplication> app, const QString& qmFilePath)
+qguiapplicationLoadTranslation(T& app, const QString& qmFilePath)
 {
   auto translator = ::std::make_unique<QTranslator>();
   if (!translator->load(qmFilePath)) {
     qDebug() << "Failed to load translation file:" << qmFilePath;
     return false;
   }
-  return app->installTranslator(translator.get());
+  return app.installTranslator(translator.get());
 }
 
 }

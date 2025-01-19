@@ -31,8 +31,9 @@ qguiapplicationSetDesktopFileName(const QString& name);
 QString
 qguiapplicationDesktopFileName();
 
+template<typename T>
 bool
-qguiapplicationLoadTranslation(std::unique_ptr<QGuiApplication> app, const QString& qmFilePath);
+qguiapplicationLoadTranslation(T& app, const QString& qmFilePath);
 
 }
 }
