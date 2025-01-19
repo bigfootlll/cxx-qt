@@ -75,6 +75,7 @@ qguiapplicationSetupLanguage(const QString& language)
 
   // 遍历所有子对象查找 QQmlApplicationEngine
   auto engines = QGuiApplication::instance()->findChildren<QQmlApplicationEngine*>();
+  qDebug() << "Found" << engines.size() << "QQmlApplicationEngine objects";
   for (auto* engine : engines) {
     qDebug() << "Retranslating QQmlApplicationEngine:" << engine;
     engine->retranslate();
