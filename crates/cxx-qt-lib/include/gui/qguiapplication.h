@@ -39,6 +39,8 @@ qguiapplicationLoadTranslation(T& app, const QString& qmFilePath) {
   if (!translator->load(qmFilePath)) {
     qDebug() << "Failed to load translation file:" << qmFilePath;
     return false;
+  } else {
+    qDebug() << "Loaded translation file:" << qmFilePath;
   }
   return app.installTranslator(translator.get());
 }
