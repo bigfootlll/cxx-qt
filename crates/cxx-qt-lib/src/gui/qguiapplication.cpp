@@ -11,6 +11,7 @@
 #include "cxx-qt-lib/qcoreapplication.h"
 #include <QTranslator>
 #include <QDebug>
+#include <QEvent>
 
 namespace rust {
 namespace cxxqtlib1 {
@@ -68,6 +69,8 @@ qguiapplicationSetupLanguage(const QString& language)
   }
   // QGuiApplication takes ownership of the translator
   QGuiApplication::installTranslator(translator);
+  QEvent languageChangeEvent(QEvent::LanguageChange);
+  QGuiApplication::sendEvent(QGuiApplication::instance(), &languageChangeEvent);
 }
 }
 }
