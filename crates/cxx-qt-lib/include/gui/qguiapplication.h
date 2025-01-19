@@ -10,6 +10,7 @@
 
 #include <QtGui/QFont>
 #include <QtGui/QGuiApplication>
+#include <QtCore/QTranslator>
 
 #include "rust/cxx.h"
 
@@ -33,7 +34,14 @@ qguiapplicationDesktopFileName();
 
 template<typename T>
 bool
-qguiapplicationLoadTranslation(T& app, const QString& qmFilePath);
+qguiapplicationLoadTranslation(T& app, const QString& qmFilePath) {
+  auto translator = ::std::make_unique<QTranslator>();
+  if (!translator->load(qmFilePath)) {
+    qDebug() << "Failed to load translation file:" << qmFilePath;
+    return false;
+  }
+  return app.installTranslator(translator.get());
+}
 
 }
 }
