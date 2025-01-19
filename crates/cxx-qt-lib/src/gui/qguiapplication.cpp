@@ -12,6 +12,7 @@
 #include <QTranslator>
 #include <QDebug>
 #include <QEvent>
+#include "cxx-qt-lib/qqmlapplicationengine.h"
 
 namespace rust {
 namespace cxxqtlib1 {
@@ -71,6 +72,11 @@ qguiapplicationSetupLanguage(const QString& language)
   QGuiApplication::installTranslator(translator);
   QEvent languageChangeEvent(QEvent::LanguageChange);
   QGuiApplication::sendEvent(QGuiApplication::instance(), &languageChangeEvent);
+
+  auto* engine = QGuiApplication::instance()->findChild<QQmlApplicationEngine*>("engine");
+  if (engine) {
+    engine->retranslate();
+  }
 }
 }
 }
