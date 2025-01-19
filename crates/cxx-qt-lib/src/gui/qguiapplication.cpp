@@ -73,8 +73,10 @@ qguiapplicationSetupLanguage(const QString& language)
   QEvent languageChangeEvent(QEvent::LanguageChange);
   QGuiApplication::sendEvent(QGuiApplication::instance(), &languageChangeEvent);
 
-  auto* engine = QGuiApplication::instance()->findChild<QQmlApplicationEngine*>("engine");
-  if (engine) {
+  // 遍历所有子对象查找 QQmlApplicationEngine
+  auto engines = QGuiApplication::instance()->findChildren<QQmlApplicationEngine*>();
+  for (auto* engine : engines) {
+    qDebug() << "Retranslating QQmlApplicationEngine:" << engine;
     engine->retranslate();
   }
 }
