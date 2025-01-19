@@ -35,14 +35,17 @@ qguiapplicationDesktopFileName();
 template<typename T>
 bool
 qguiapplicationLoadTranslation(T& app, const QString& qmFilePath) {
-  auto translator = ::std::make_unique<QTranslator>();
+  // Create translator as a raw pointer since QGuiApplication takes ownership
+  auto* translator = new QTranslator();
   if (!translator->load(qmFilePath)) {
     qDebug() << "Failed to load translation file:" << qmFilePath;
+    delete translator;
     return false;
   } else {
     qDebug() << "Loaded translation file:" << qmFilePath;
   }
-  return app.installTranslator(translator.get());
+  // QGuiApplication takes ownership of the translator
+  return app.installTranslator(translator);
 }
 
 }
